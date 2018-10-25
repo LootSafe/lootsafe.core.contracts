@@ -1,0 +1,1 @@
+# lootsafe.core.contracts
