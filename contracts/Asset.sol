@@ -10,9 +10,11 @@ import './zeppelin/contracts/math/SafeMath.sol';
  */
 contract Asset is StandardToken, Ownable {
     using SafeMath for uint;
-
+    // Symbol of the asset
     string public symbol;
+    // Name of the asset
     string public name;
+    // Decimal precision of asset (generally 0 for non divisible assets)
     uint8 public decimals = 0;
     // Locking the token stops future minting of the token
     bool public locked = false;

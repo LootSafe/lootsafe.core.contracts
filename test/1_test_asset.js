@@ -33,11 +33,9 @@ contract('Asset', (accounts) => {
         const asset = await Asset.new('DRAW', 'Philanthropy Draw', {from: accounts[0]});
         await asset.setMetadata(
             'description',
-            'Made from the golden spine ripped from the back of the god Midasel and tied with a bowstring made from a single silver hair stolen from the goddess Ariana in her slumber. Copurnius the brother of the two, spurned by his siblings for being less beautiful than they, wished to see an end to the greed painted upon humanity\'s creation by them. \n' +
+            'Made from the golden spine ripped from the back of the god Midasil and tied with a bowstring made from a single silver hair stolen from the goddess Ariana in her slumber.  Copurnius the brother of the two and creator of this bow was spurned by his siblings for being less beautiful than they. He wished to see an end to the greed that they wove into humanity\'s creation.  He carved arrowheads from the copper that gleamed in his eyes.  Copurnius was the only one not blinded by greed, but quite literally blinded by his charity.\n' +
             '\n' +
-            'He forged this bow for one with a will for the weak. Arrowheads made from the copper in his eyes, he was the one not blinded by greed, but by quite literally blinded by his charity. This bow deemed "Philanthropy Draw" was most famously used by the held by the figure known as Robin Hood. \n' +
-            '\n' +
-            'Many others though, throughout history have been the wielders of this bow though, providing to all.'
+            'This bow was forged for those with a will for the weak.  The bow was deemed "Philanthropy Draw" and was most famously held by the figure known as Robin Hood.  Many others though throughout history have been the wielders of this bow though, providing gifts to all.\n'
         );
         await asset.setMetadata('rarity', 'Epic');
         await asset.setMetadata('version', 'Origin');
