@@ -1,0 +1,4 @@
+[submodule "contracts/zeppelin"]
+	path = contracts/zeppelin
+	url = https://github.com/OpenZeppelin/openzeppelin-solidity.git
+	branch = v1.12.0
