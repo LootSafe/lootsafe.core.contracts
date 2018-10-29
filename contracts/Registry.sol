@@ -34,7 +34,7 @@ contract Registry is Ownable {
   * @param identifier The code friendly identifier of the asset
   */
   function create(string symbol, string name, bytes32 identifier) external onlyOwner {
-    require(assetAddresses[identifier] == 0x0, "ASSET NAME RESERVED");
+    require(assetAddresses[identifier] == address(0), "ASSET NAME RESERVED");
     Asset newAsset = new Asset(symbol, name);
     assets.push(identifier);
     assetAddresses[identifier] = address(newAsset);
