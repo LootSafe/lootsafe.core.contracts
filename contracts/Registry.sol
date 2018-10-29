@@ -27,17 +27,18 @@ contract Registry is Ownable {
     return assets;
   }
 
-  /**
+   /**
   * @dev Create a new asset within this registry
   * @param symbol The symbol for this asset
   * @param name The name of the asset
+  * @param identifier The code friendly identifier of the asset
   */
-  function create(string symbol, string name, bytes32 shortName) external onlyOwner {
-    require(assetAddresses[shortName] == 0x0, "ASSET NAME RESERVED");
+  function create(string symbol, string name, bytes32 identifier) external onlyOwner {
+    require(assetAddresses[identifier] == 0x0, "ASSET NAME RESERVED");
     Asset newAsset = new Asset(symbol, name);
-    assets.push(shortName);
-    assetAddresses[shortName] = address(newAsset);
-    emit AssetCreated(shortName);
+    assets.push(identifier);
+    assetAddresses[identifier] = address(newAsset);
+    emit AssetCreated(identifier);
   }
 
   event AssetCreated (bytes32 shortName);
