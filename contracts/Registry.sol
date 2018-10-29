@@ -41,5 +41,5 @@ contract Registry is Ownable {
     emit AssetCreated(identifier);
   }
 
-  event AssetCreated (bytes32 shortName);
+  event AssetCreated (bytes32 identifier);
 }
