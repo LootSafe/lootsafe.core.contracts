@@ -46,6 +46,7 @@ contract Asset is StandardToken, Ownable {
         require(locked == false, "CONTRACT LOCKED");
         totalSupply_ = totalSupply_.add(amount);
         balances[to] = balances[to].add(amount);
+        emit AssetMinted(amount, to);
     }
 
     /**
@@ -63,5 +64,9 @@ contract Asset is StandardToken, Ownable {
     function setMetadata(bytes32 key, string value) external onlyOwner {
         require(bytes(metadata[key]).length == 0, "PRE-EXISTING METADATA");
         metadata[key] = value;
+        emit MetadataAdded(key, value);
     }
+
+    event AssetMinted (uint amount, address to);
+    event MetadataAdded (bytes32 key, string value);
 }

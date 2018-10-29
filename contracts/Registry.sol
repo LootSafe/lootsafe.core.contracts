@@ -37,5 +37,8 @@ contract Registry is Ownable {
     Asset newAsset = new Asset(symbol, name);
     assets.push(shortName);
     assetAddresses[shortName] = address(newAsset);
+    emit AssetCreated(shortName);
   }
+
+  event AssetCreated (bytes32 shortName);
 }
