@@ -8,8 +8,6 @@ import './Asset.sol';
  * @dev The registry represents a party that owns a list of assets within the system
  */
 contract Registry is Ownable {
-  // Owner of the registry, usually a studio or publisher
-  address public owner;
   // List of all assets registered.
   mapping(bytes32 => address) public assetAddresses;
   // A list of all asset short names registered.
@@ -36,6 +34,7 @@ contract Registry is Ownable {
   function create(string symbol, string name, bytes32 identifier) external onlyOwner {
     require(assetAddresses[identifier] == address(0), "ASSET NAME RESERVED");
     Asset newAsset = new Asset(symbol, name);
+    newAsset.transferOwnership(owner);
     assets.push(identifier);
     assetAddresses[identifier] = address(newAsset);
     emit AssetCreated(identifier);
