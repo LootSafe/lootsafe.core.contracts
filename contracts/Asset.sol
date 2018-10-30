@@ -1,5 +1,5 @@
 pragma solidity ^0.4.23;
-import './zeppelin/contracts/token/ERC20/StandardToken.sol';
+import './zeppelin/contracts/token/ERC20/BasicToken.sol';
 import './zeppelin/contracts/ownership/Ownable.sol';
 import './zeppelin/contracts/math/SafeMath.sol';
 
@@ -8,7 +8,7 @@ import './zeppelin/contracts/math/SafeMath.sol';
  *
  * @dev The asset is an ERC20 token with unlimited supply and an additional metadata option
  */
-contract Asset is StandardToken, Ownable {
+contract Asset is BasicToken, Ownable {
     using SafeMath for uint;
     // Symbol of the asset
     string public symbol;
@@ -54,6 +54,7 @@ contract Asset is StandardToken, Ownable {
     */
     function lock() external onlyOwner {
         locked = true;
+        emit Locked();
     }
 
     /**
@@ -69,4 +70,5 @@ contract Asset is StandardToken, Ownable {
 
     event AssetMinted (uint amount, address to);
     event MetadataAdded (bytes32 key, string value);
+    event Locked();
 }

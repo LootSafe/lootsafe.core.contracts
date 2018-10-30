@@ -13,7 +13,6 @@ contract Registry is Ownable {
   // A list of all asset short names registered.
   bytes32[] public assets;
 
-
   constructor() public {
     owner = msg.sender;
   }
@@ -37,8 +36,8 @@ contract Registry is Ownable {
     newAsset.transferOwnership(owner);
     assets.push(identifier);
     assetAddresses[identifier] = address(newAsset);
-    emit AssetCreated(identifier);
+    emit AssetCreated(identifier, address(newAsset));
   }
 
-  event AssetCreated (bytes32 identifier);
+  event AssetCreated (bytes32 identifier, address _address);
 }
