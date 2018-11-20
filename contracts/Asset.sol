@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.24;
 import './zeppelin/contracts/token/ERC20/BasicToken.sol';
 import './zeppelin/contracts/ownership/Ownable.sol';
 import './zeppelin/contracts/math/SafeMath.sol';
@@ -18,6 +18,11 @@ contract Asset is BasicToken, Ownable {
     uint8 public decimals = 0;
     // Locking the token stops future minting of the token
     bool public locked = false;
+
+    modifier canMint() {
+        require(!locked, "CONTRACT LOCKED");
+        _;
+    }
 
     // Suggested Standard Metadata
     // =======================================================
@@ -42,11 +47,13 @@ contract Asset is BasicToken, Ownable {
     * @param amount The amount of the asset to mint
     * @param to The address to mint to.
     */
-    function mint(uint amount, address to) external onlyOwner {
-        require(locked == false, "CONTRACT LOCKED");
+    function mint(uint amount, address to) external onlyOwner canMint {
+        require(to != address(0), "INVALID RECIPIENT");
         totalSupply_ = totalSupply_.add(amount);
         balances[to] = balances[to].add(amount);
+
         emit AssetMinted(amount, to);
+        emit Transfer(address(0), to, amount);
     }
 
     /**
@@ -54,6 +61,7 @@ contract Asset is BasicToken, Ownable {
     */
     function lock() external onlyOwner {
         locked = true;
+
         emit Locked();
     }
 
@@ -64,7 +72,9 @@ contract Asset is BasicToken, Ownable {
     */
     function setMetadata(bytes32 key, string value) external onlyOwner {
         require(bytes(metadata[key]).length == 0, "PRE-EXISTING METADATA");
+        require(bytes(value).length > 0, "METADATA EMPTY");
         metadata[key] = value;
+
         emit MetadataAdded(key, value);
     }
 

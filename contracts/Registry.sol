@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.24;
 import './zeppelin/contracts/ownership/Ownable.sol';
 import './Asset.sol';
 
@@ -24,6 +24,12 @@ contract Registry is Ownable {
     return assets;
   }
 
+  /**
+  * @dev Get the total number of assets in the registry
+  */
+  function getAssetCount() public view returns (uint) {
+    return assets.length;
+  }
    /**
   * @dev Create a new asset within this registry
   * @param symbol The symbol for this asset
